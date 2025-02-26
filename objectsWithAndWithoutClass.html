@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objects With and Without Classes</title>
+</head>
+<body>
+<script>
+    // ohne class heißen "constructor functions"
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.greet = function () {
+            console.log(`Hallo, ich bin ${this.name}`);
+        }
+    }
+    // Aufgabe A:
+    // lösche die obige Funktion greet(), die innerhalb der Funktion Person steht
+    // und schreibe eine Ersatzfunktion, die außerhalb der Funktion Person steht,
+    // die exakt das gleiche macht
+    let person1 = new Person("Alice", 25);
+    person1.greet();
+
+    // Aufgabe B:
+    // Schreibe eine Klasse Person mit Konstruktor und Funktion greet, die die gleiche
+    // Funktionalität hat
+
+    // Aufgabe C: gegeben ist die Funktion
+    function Student(name, age, subject) {
+        Person.call(this, name, age); // ruft den Konstruktor von Person auf
+        this.subject = subject;
+        this.fachgebiet = function () {
+            console.log(this.subject);
+        }
+    }
+
+    let studi = new Student('Peter', 30, 'Informatik');
+    studi.greet();
+    studi.fachgebiet();
+
+    // weiter mit Aufgabe C: Lösche die Methode fachgebiet() innerhalb der Funktion Student
+    // Schreibe dieselbe Methode außerhalb der Funktion Student
+
+    // Aufgabe D: schreibe die Klasse Student mit der gleichen Funktionalität
+
+
+</script>
+</body>
+</html>
