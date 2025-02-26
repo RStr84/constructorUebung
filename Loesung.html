@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    // Aufgabe A:
+    // lösche die obige Funktion greet(), die innerhalb der Funktion Person steht
+    // und schreibe eine Ersatzfunktion, die außerhalb der Funktion Person steht,
+    // die exakt das Gleiche macht
+    // bei einfachen Objekten kann ich Attribute und Methoden erweitern,
+    // bei constructor-Funktionen muss ich zusätzlich .prototype hinzufügen
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // function greet(person) {
+    //     console.log(`Hallo, ich bin ${person.name}, ${person.age} Jahre alt!`);
+    // }
+
+    Person.prototype.greet = function() {
+        console.log(`Hallo, ich bin ${this.name}, ${this.age} Jahre alt!`);
+    }
+
+    let person1 = new Person("Alice", 25);
+    // greet(person1);
+    person1.greet();
+
+
+
+    // Aufgabe B:
+    // Schreibe eine Klasse Person mit Konstruktor und Funktion greet, die die gleiche
+    // Funktionalität hat
+
+    class PersonB {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        greet() {
+            console.log(`Hallo, ich bin ${this.name} und bin ${this.age}!`);
+        }
+    }
+
+    let person2 = new PersonB("Alice", 25);
+    person2.greet();
+
+
+
+    // Aufgabe C: gegeben ist die Funktion
+    // weiter mit Aufgabe C: Lösche die Methode fachgebiet() innerhalb der Funktion Student
+    // Schreibe dieselbe Methode außerhalb der Funktion Student
+    function Student(name, age, subject) {
+        Person.call(this, name, age); // ruft den Konstruktor von Person auf
+        this.subject = subject;
+    }
+
+    Student.prototype = Object.create(Person.prototype);    // nötig für studi.greet()
+
+    Student.prototype.fachgebiet = function() {
+        console.log(`Mein Fachgebiet ist ${this.subject}!`);
+    }
+
+    let studi = new Student('Peter', 30, 'Informatik');
+    studi.greet();  // geht ohne prototype nicht
+    studi.fachgebiet();
+
+
+
+    // Aufgabe D: schreibe die Klasse Student mit der gleichen Funktionalität
+
+    class StudentB extends Person {
+        constructor(name, age, subject) {
+            super(name, age);
+            this.subject = subject;
+        }
+
+        fachgebiet2() {
+            console.log(`Mein Fachgebiet ist ${this.subject}!`);
+        }
+    }
+
+    let studi2 = new StudentB('Raphael', 40, 'Kaffee trinken!');
+    studi2.greet();
+    studi2.fachgebiet2()
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

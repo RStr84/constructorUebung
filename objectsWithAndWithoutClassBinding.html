@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objects Binding</title>
+</head>
+<body>
+<script>
+    function Person(name) {
+        this.name = name;
+        this.greet = function() {
+            console.log(`Hallo, ich bin ${this.name}`);
+        };
+    }
+
+    const person = new Person("Alice");
+
+    setTimeout(person.greet, 500); // ❌ Fehler: Konstruktorfunktion hat "this.name" vergessen,
+
+    setTimeout(person.greet.bind(person), 1000); // ✅ Funktioniert: this bleibt an person gebunden
+    // Aufgabe A: von welcher eigebauten Klasse übernimmt person die Methode bind?
+
+    class Person2 {
+        constructor(name) {
+            this.name = name;
+        }
+
+        greet = function () {
+            console.log(`Hallo, ich bin ${this.name}`);
+        };
+    }
+    const person2 = new Person2("Pete");
+    person2.greet();
+    setTimeout(person2.greet, 1500);
+
+    // Aufgabe B:
+    // Schreibe in Person2 die Methode als "arrow-function" und erkläre den Unterschied
+</script>
+</body>
+</html>
